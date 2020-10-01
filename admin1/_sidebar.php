@@ -74,7 +74,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="commandes.php">
                 <span class="menu-title">Commandes</span>
                 <i class="mdi mdi mdi-cart-plus menu-icon"></i>
             </a>

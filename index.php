@@ -10,7 +10,7 @@
 	            <div class="col-md-12 ftco-animate text-center">
 	              <h1 class="mb-2">Avec nous, manger devient un plaisir</h1>
 	              <h2 class="subheading mb-4">Nous vous offrons des produits de qualit&eacute;</h2>
-	              <p><a href="#" class="btn btn-primary">Plus d'infos</a></p>
+	              <p><a href="shop.php" class="btn btn-primary">Plus d'infos</a></p>
 	            </div>
 
 	          </div>
@@ -25,7 +25,7 @@
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">Les grillades de qualit&eacute;, c'est notre métier</h1>
 	              <h2 class="subheading mb-4">Nous vous offrons des produits de qualit&eacute;</h2>
-	              <p><a href="#" class="btn btn-primary">Plus d'infos</a></p>
+	              <p><a href="shop.php" class="btn btn-primary">Plus d'infos</a></p>
 	            </div>
 	          </div>
 	        </div>
@@ -148,7 +148,7 @@
     	<div class="col-md-6 col-lg-3 ftco-animate">
     						<div class="product">
     					<a href="#" class="img-prod">
-    <img class="img-fluid" src="img/<?= $product ->id; ?>.jpg" alt="Colorlib Template">
+    <img class="img-fluid" src="admin1/assets/images/<?= $product ->images; ?>" alt="Colorlib Template">
 
     						<span class="status"><?php echo"-"; ?><?= number_format($product->remise);echo" %";?></span>
     						<div class="overlay"></div>
@@ -200,13 +200,8 @@
             <h2 class="mb-4">L'affaire du jour</h2>
             <!--<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>-->
             <h3><a href="#">Spinach</a></h3>
-            <span class="price">$10 <a href="#">now $5 only</a></span>
-            <div id="timer" class="d-flex mt-5">
-						  <div class="time" id="days"></div>
-						  <div class="time pl-3" id="hours"></div>
-						  <div class="time pl-3" id="minutes"></div>
-						  <div class="time pl-3" id="seconds"></div>
-            </div>
+            <span class="price">10000 FCFA <a href="#">devient 7000 FCFA seulement</a></span>
+
           </div>
         </div>   		
     	</div>
@@ -236,24 +231,7 @@
     	</div>
     </section>
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">

@@ -30,6 +30,7 @@ require '_header.php';
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer.css">
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-primary">
@@ -69,17 +70,17 @@ require '_header.php';
 	          		<a class="dropdown-item" href="burger&tacos.php">Burgers & Tacos</a>
               <a class="dropdown-item" href="pizzas.php">Pizzas</a>
               <a class="dropdown-item" href="cocktails.php">Cocktails</a>
-              <a class="dropdown-item" href="ice_cream.php">Ice cream</a>
+              <a class="dropdown-item" href="ice_cream.php">Crèmes & Glaces</a>
                 </div>
              </li>
 
-            <li class="nav-item dropdown">
+           <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Commandes</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="commande_emporter.php">Pour emporter</a>
                 <a class="dropdown-item" href="commande_livraison.php">Pour livraison</a>
               </div>
-            </li>
+            </li>-->
              <!--<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -89,11 +90,19 @@ require '_header.php';
                 <a class="dropdown-item" href="checkout.php">Paiement</a>
               </div>
             </li>-->
+	          <li class="nav-item"><a href="shop.php" class="nav-link">Produits</a></li>
 	          <li class="nav-item"><a href="about.php" class="nav-link">&Agrave; propos</a></li>
 	         <!-- <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>-->
 	          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta cta-colored"><a href="panier.php" class="nav-link"><span class="icon-shopping_cart"><span id="total"><?=number_format($panier->total(),2,',',' '); ?> FCFA&nbsp;</span></span>[<span id="count"><?= $panier->count();?></span>]</a></li>
 
+                <?php
+                session_start();
+                $auth = $_SESSION["auth"];
+                if ($auth === 'YES'):
+                ?>
+                <li class="nav-item"><a href="logout.php" class="nav-link">Deconnexion</a></li>
+                <?php endif; ?>
 	        </ul>
 	      </div>
 	    </div>

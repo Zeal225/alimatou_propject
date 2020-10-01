@@ -1,10 +1,18 @@
 <?php
-
 include 'config.php';
 
+session_start();
+$auth = $_SESSION["admin_auth"];
+if ($auth !== 'YES'){
+    header("Location: login.php");
+    exit();
+}
+
 $commandes = getAllCommande();
+//var_dump($commandes); die();
 $count_commande = countCommande();
 $count_produits = countProduits();
+$count_paiements = countPaiements();
 
 
 ?>
@@ -46,8 +54,6 @@ $count_produits = countProduits();
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                  <i class="mdi mdi-home"></i>
                 </span> Tableau de bord </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -91,7 +97,7 @@ $count_produits = countProduits();
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Paiements  <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">5741</h2>
+                    <h2 class="mb-5"><?php echo $count_paiements ?></h2>
                     <!--<h6 class="card-text">Increased by 5%</h6>-->
                   </div>
                 </div>
@@ -112,7 +118,9 @@ $count_produits = countProduits();
                             <th> Date de commande </th>
                             <th> Réference commande </th>
                             <th> Montant total </th>
+                            <th> Reference commande </th>
                             <th> Lieu de livraison </th>
+                            <th> Contat client </th>
                             <th> Status livraison </th>
                             <th> Status paiement </th>
                             <th> Actions </th>
@@ -130,8 +138,14 @@ $count_produits = countProduits();
                             <td>
                                 <?php echo $commande["montant"] ?>
                             </td>
+                              <td>
+                                  <?php echo $commande["ref_commande"] ?>
+                              </td>
                             <td>
                                 <?php echo $commande["lieu_livraison"] ?>
+                            </td>
+                              <td>
+                                <?php echo $commande["contact"] ?>
                             </td>
                             <td>
 
@@ -162,7 +176,7 @@ $count_produits = countProduits();
                                 ?>
                             </td>
                               <td>
-                                  <button type="button" class="btn btn-gradient-info btn-sm">Voir details</button>
+                                  <a href="modifier_commande.php?id_cmd=<?php echo $commande['id_cmd'] ?>" type="button" class="btn btn-gradient-info btn-sm">Modifier</a>
                               </td>
                           </tr>
                           <?php endforeach;   ?>

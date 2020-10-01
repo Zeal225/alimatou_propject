@@ -1,6 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo" href="index.php">
+<!--            <img src="assets/images/logo-mini.svg" alt="logo" />-->
             CHEZ RIFAT
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.php">
@@ -71,7 +72,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" href="logout.php">
                         <i class="mdi mdi-logout mr-2 text-primary"></i> Deconnexion </a>
                 </div>
             </li>

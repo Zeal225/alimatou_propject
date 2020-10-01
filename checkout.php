@@ -1,4 +1,59 @@
-<?php require 'header.php'; ?>
+<?php
+ob_start();
+require 'header.php'; ?>
+
+<?php
+session_start();
+$ids = array_keys($_SESSION['panier']);
+if (empty($ids)){
+    header("Location: index.php");
+    exit();
+}
+?>
+
+<?php
+
+if (isset($_POST['add'])) {
+    $serveur = 'localhost';
+    $db = 'restaurant';
+    $utilisateur = 'root';
+    $mot_passe = 'root';
+    try {
+        $connexion = new PDO("mysql:host=$serveur;dbname=$db", "$utilisateur", "$mot_passe");
+        echo '';
+    } catch (PDOException $event) {
+        die('Attention Erreur:' . $event->getMessage());
+    }
+//Insérer des données $connexion->exec(requete Insert etc);
+//recuperer les valeurs
+
+    $email_client = $_POST['email_client'];
+
+    $req = $connexion->prepare('SELECT id_client,mot_de_passe_client FROM client WHERE email_client = :email_client');
+    $req->execute(array(
+        "email_client" => $email_client));
+    $resultat = $req->fetch();
+    $isPasswordCorrect =
+        password_verify($_POST['mot_de_passe_client'], $resultat['mot_de_passe_client']);
+    if (!$resultat) {
+        echo "Mauvais identifiant ou mot de passe !";
+    } else {
+        if ($isPasswordCorrect) {
+            session_start();
+            $_SESSION['id_client'] = $resultat['id_client'];
+            $_SESSION['email_client'] = $email_client;
+            $_SESSION["auth"] = "YES";
+            $_SESSION["auth_id"] = $resultat["id_client"];
+            //$_SESSION['mot_de_passe_client']=$mot_de_passe_client;
+            //echo "vous &ecirc;tes connect&eacute; !";
+        } else {
+            echo "Mauvais identifiant ou mot de passe !";
+        }
+
+    }
+}
+
+?>
 
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
     <div class="container">
@@ -16,11 +71,16 @@
         <div class="container">
             <div class="row justify-content-center">
 
-                <div class="col-xl-6 ftco-animate">
 
+                <div class="col-xl-6 ftco-animate">
+                    <?php
+                    session_start();
+                    $auth = $_SESSION["auth"];
+                    if ($auth !== 'YES'):
+                    ?>
                     <h3 class="mb-4 billing-heading">CONNECTEZ-VOUS</h3>
                     <div class="row align-items-end">
-                        <form style="width: 100%" action="#" class="billing-form" method="post">
+                        <form style="width: 100%" action="checkout.php" class="billing-form" method="post">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="emailaddress">Email</label>
@@ -35,50 +95,15 @@
                                        class="form-control" placeholder="">
                             </div>
                         </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="submit" name="add" value="Connexion" id="add"
+                                           class=" btn btn-success"> ou
+                                    <a href="inscription.php" class="ml-2">S'inscrire </a>
+                                </div>
+                            </div>
                         </form>
-                        <?php
-
-                        if (isset($_POST['add'])) {
-                            $serveur = 'localhost';
-                            $db = 'restaurant';
-                            $utilisateur = 'root';
-                            $mot_passe = '';
-                            try {
-                                $connexion = new PDO("mysql:host=$serveur;dbname=$db", "$utilisateur", "$mot_passe");
-                                echo '';
-                            } catch (PDOException $event) {
-                                die('Attention Erreur:' . $event->getMessage());
-                            }
-//Insérer des données $connexion->exec(requete Insert etc);
-//recuperer les valeurs
-
-                            $email_client = $_POST['email_client'];
-
-                            $req = $connexion->prepare('SELECT id_client,mot_de_passe_client FROM client WHERE email_client = :email_client');
-                            $req->execute(array(
-                                "email_client" => $email_client));
-                            $resultat = $req->fetch();
-                            $isPasswordCorrect =
-                                password_verify($_POST['mot_de_passe_client'], $resultat['mot_de_passe_client']);
-                            if (!$resultat) {
-                                echo "Mauvais identifiant ou mot de passe !";
-                            } else {
-                                if ($isPasswordCorrect) {
-                                    session_start();
-                                    $_SESSION['id_client'] = $resultat['id_client'];
-                                    $_SESSION['email_client'] = $email_client;
-                                    //$_SESSION['mot_de_passe_client']=$mot_de_passe_client;
-                                    echo "vous &ecirc;tes connect&eacute; !";
-                                } else {
-                                    echo "Mauvais identifiant ou mot de passe !";
-                                }
-
-                            }
-                        }
-
-                        ?>&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-sm btn-success mr-2" href="inscription.php">Connexion </a> ou
-                        <a href="inscription.php" class="ml-2">S'inscrire </a>
+                       &nbsp;&nbsp;&nbsp;
                         <div class="w-100"></div>
                         <div class="w-100"></div>
                         <!--<div class="col-md-12">
@@ -89,7 +114,11 @@
                             </div>
                         </div>-->
                     </div>
+                    <?php else: ?>
+                        <h3 class="mb-4 billing-heading">VALIDER VOTRE COMMANDE</h3>
+                    <?php endif; ?>
                 </div>
+
 
                 <div class="col-xl-6">
                     <div class="row mt-5 pt-3">

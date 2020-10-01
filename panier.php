@@ -11,7 +11,7 @@ if(isset($_GET['del'])){
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
-            <h1 class="mb-0 bread">My Cart</h1>
+            <h1 class="mb-0 bread">Mon panier</h1>
           </div>
         </div>
       </div>
@@ -98,7 +98,17 @@ foreach($products as $product):
           <center>
             <div>
           
-            <p><a href="checkout.php" class="btn btn-primary py-3 px-4">Proc&eacute;der au paiement</a></p>
+            <p>
+                <?php
+                session_start();
+                $ids = array_keys($_SESSION['panier']);
+                if (empty($ids)):
+                ?>
+                <h2>Votre panier est vide</h2>
+                <?php else: ?>
+                    <a href="checkout.php" class="btn btn-primary py-3 px-4">Proc&eacute;der au paiement</a>
+                <?php endif; ?>
+            </p>
           </div>
         </center>
         <?php 
@@ -126,7 +136,7 @@ foreach($products as $product):
           ?>
  
           <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-            <div class="cart-total mb-3">
+            <div class="">
                <?php
                /*<h3>Facture</h3>
               <p class="d-flex">

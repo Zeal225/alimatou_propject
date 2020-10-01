@@ -1,8 +1,22 @@
-<?php require 'header.php';?>
+<?php ob_start(); require 'header.php';?>
 <?php
 if(isset($_GET['del'])){
   $panier->del($_GET['del']);
 
+}
+?>
+
+<?php
+session_start();
+$auth = $_SESSION["auth"];
+if ($auth !== 'YES'){
+    header("Location: checkout.php");
+    exit();
+}
+$ids = array_keys($_SESSION['panier']);
+if (empty($ids)){
+    header("Location: index.php");
+    exit();
 }
 ?>
 
@@ -76,6 +90,7 @@ $products = $DB->query('SELECT * FROM products WHERE id IN ('.implode(',',$ids).
             <div>
                 <?php
                 //Credential
+                session_start();
                 $apikey = '7724396325a61cf7bcf0f23.39853641';
                 $cpm_site_id = '525267';
 
@@ -91,7 +106,7 @@ $products = $DB->query('SELECT * FROM products WHERE id IN ('.implode(',',$ids).
                 $cpSecure = "https://secure.cinetpay.com";
 
                 $cpm_trans_date = date("Y-m-d H:i:s");
-                $cpm_trans_id = 'BELV-' . (string)date("YmdHis"); //J'ai ajouter 'Test-' pour eviter les duplication dans CP
+                $cpm_trans_id = $_SESSION["id_trans"]; //J'ai ajouter 'Test-' pour eviter les duplication dans CP
                 $return_url = ""; //Le client sera rediriger vers cette url apres son paiement
                 $notify_url = "";
                 $cancel_url = "";

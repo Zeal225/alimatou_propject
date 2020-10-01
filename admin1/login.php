@@ -15,7 +15,8 @@ if (!empty($_POST['btn-login'])) {
         $user_id = login($email, $password); // check user login
         if($user_id > 0)
         {
-            //$_SESSION['user_id'] = 'session'; //Set Session
+            session_start();
+            $_SESSION['admin_auth'] = 'YES'; //Set Session
             header("Location: index.php"); // Redirect user to the profile.php
         }
         else

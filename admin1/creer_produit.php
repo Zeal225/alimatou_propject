@@ -1,18 +1,32 @@
 <?php
 include 'config.php';
+
+session_start();
+$auth = $_SESSION["admin_auth"];
+if ($auth !== 'YES'){
+    header("Location: login.php");
+    exit();
+}
 if (!empty($_POST["enregistrer"])) {
+
+    $uploaddir = 'assets/images/';
+    $front_dir = '../images/';
+    $uploadfile =  $uploaddir . basename($_FILES['images']['name']);
+    $uploadfile_front =  $front_dir . basename($_FILES['images']['name']);
+
+    if (move_uploaded_file($_FILES['images']['tmp_name'], $uploadfile)) {
+        $image_back =  basename($_FILES['images']['name']);
+    }
 
     if ($_POST['name'] == "") {
         $register_error_message = 'Le nom est obligatoire';
     } else if ($_POST['description'] == "") {
         $register_error_message = 'Le email est obligatoire';
-    } else if ($_POST['images'] == "") {
-        $register_error_message = 'Le prenom est obligatoire';
-    } else if ($_POST['prix'] == "") {
+    }else if ($_POST['prix'] == "") {
         $register_error_message = 'Le mot de passe est obligatoire';
     } else {
         try {
-            $new_user = createProduits($_POST['name'], $_POST['description'], $_POST['images'], $_POST['prix']);
+            $new_user = createProduits($_POST['name'], $_POST['description'], $image_back, $_POST['prix']);
         }catch (Exception $exception){
         }
         //$_SESSION['user_id'] = $user_id;
@@ -76,7 +90,7 @@ if (!empty($_POST["enregistrer"])) {
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <form action="creer_produit.php" method="post" class="forms-sample">
+                                <form action="creer_produit.php" method="post" class="forms-sample" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="exampleInputUsername1">Libelle produit</label>
                                         <input name="name" type="text" class="form-control" id="name" placeholder="libelle produit">
@@ -87,7 +101,7 @@ if (!empty($_POST["enregistrer"])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Images</label>
-                                        <input name="images" type="text" class="form-control" id="images" placeholder="Images">
+                                        <input name="images" type="file" class="form-control" id="images" placeholder="Images">
                                     </div>
                                     <div class="form-group">
                                         <label for="prix">Prix</label>

@@ -5,7 +5,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
-            <h1 class="mb-0 bread">Products</h1>
+            <h1 class="mb-0 bread">Produits</h1>
           </div>
         </div>
       </div>
@@ -16,12 +16,11 @@
     		<div class="row justify-content-center">
     			<div class="col-md-10 mb-5 text-center">
     				<ul class="product-category">
-    					<li><a href="#" class="active">All</a></li>
+    					<li><a href="#" class="active">Tous</a></li>
     					<li><a href="burgers&tacos.php">Burgers & Tacos</a></li>
     					<li><a href="#">Pizzas</a></li>
-    					<li><a href="#">Ice Cream</a></li>
-    					<li><a href="#">Drinks</a></li>
-
+    					<li><a href="#">Crèmes & Glaces</a></li>
+    					<li><a href="#"><Boissons></Boissons></a></li>
     				</ul>
     			</div>
     		</div>
@@ -50,32 +49,25 @@
 
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="#>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                   <!-- <a href="#>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
-                                    </a>
+                                    </a>-->
 
                                     <a href="addpanier.php?id=<?=$product->id; ?>" class="buy-now d-flex justify-content-center align-items-center mx-1 addpanier" >
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center "> 
+                                    <!--<a href="#" class="heart d-flex justify-content-center align-items-center ">
                                         <span><i class="ion-ios-heart"></i></span>
-                                    </a>
-
+                                    </a>-->
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-        
-
                 </div>
-
                     <?php endforeach ?> 
             </div>
         </div>
-    		    		<div class="row mt-5">
+            <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
@@ -93,24 +85,7 @@
     	</div>
     </section>
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">

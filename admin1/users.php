@@ -1,9 +1,15 @@
 <?php
 include 'config.php';
-$products = getProducts();
+session_start();
+$auth = $_SESSION["admin_auth"];
+if ($auth !== 'YES'){
+    header("Location: login.php");
+    exit();
+}
+$users = getAllUsers();
 
 if (!empty($_GET["id"])){
-    deleteProduit((int)$_GET["id"]);
+    deleteUser((int)$_GET["id"]);
 }
 ?>
 
@@ -63,29 +69,29 @@ if (!empty($_GET["id"])){
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Produits</h4>
+                    <h4 class="card-title">Administrateurs</h4>
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
                           <tr>
                             <th> Nom </th>
-                            <th> Description </th>
-                            <th> Prix </th>
+                            <th> Prenom </th>
+                            <th> email </th>
                             <th> Actions </th>
                           </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($products as $product): ?>
+                        <?php foreach ($users as $user): ?>
                           <tr>
                             <td>
-                             <?php echo $product['name']?>
+                             <?php echo $user['first_name']?>
                             </td>
-                            <td> <?php echo $product['description']?> </td>
-                            <td> <?php echo $product['prix']?> F CFA </td>
+                            <td> <?php echo $user['last_name']?> </td>
+                            <td> <?php echo $user['email']?> </td>
 
                               <td>
-                                  <a href="modifier_produit.php?id=<?php echo $product['id'] ?>" type="button" class="btn btn-gradient-info btn-sm">Modifier</a>
-                                  <a href="produits.php?id=<?php echo $product["id"]?>" type="button" class="btn btn-gradient-danger btn-sm">Supprimer</a>
+                                  <a href="modifier_user.php?id=<?php echo $user['id'] ?>" type="button" class="btn btn-gradient-info btn-sm">Modifier</a>
+                                  <a href="users.php?id=<?php echo $user["id"]?>" type="button" class="btn btn-gradient-danger btn-sm">Supprimer</a>
                               </td>
                           </tr>
                         <?php endforeach; ?>

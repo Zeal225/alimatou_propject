@@ -1,6 +1,5 @@
-
-
 <?php
+ob_start();
 include 'config.php';
 
 $register_error_message = '';

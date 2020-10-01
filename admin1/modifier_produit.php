@@ -1,5 +1,13 @@
 <?php
 include 'config.php';
+
+session_start();
+$auth = $_SESSION["admin_auth"];
+if ($auth !== 'YES'){
+    header("Location: login.php");
+    exit();
+}
+
 if (!empty($_GET["id"])) {
     $produit = findProduit((int)$_GET["id"]);
 }
@@ -94,7 +102,7 @@ if (!empty($_POST["modifier"])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Images</label>
-                                        <input name="images" value="<?php echo $produit["images"] ?>" type="text" class="form-control" id="images" placeholder="Images">
+                                        <input readonly name="images" value="<?php echo $produit["images"] ?>" type="text" class="form-control" id="images" placeholder="Images">
                                     </div>
                                     <div class="form-group">
                                         <label for="prix">Prix</label>

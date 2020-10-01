@@ -8,7 +8,7 @@
           <div class="col-md-12 heading-section text-center ftco-animate">
           	<span class="subheading">R&eacute;galez vous avec nos</span>
             <h2 class="mb-4">HAMBURGER & TACOS</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <p>Slogan du restaurant</p>
           </div>
         </div>   	
     	</div>
@@ -66,7 +66,7 @@
 
 
 
-    		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+    		<!--<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6">
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">

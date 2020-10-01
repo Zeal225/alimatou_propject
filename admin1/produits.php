@@ -1,5 +1,11 @@
 <?php
 include 'config.php';
+session_start();
+$auth = $_SESSION["admin_auth"];
+if ($auth !== 'YES'){
+    header("Location: login.php");
+    exit();
+}
 $products = getProducts();
 
 if (!empty($_GET["id"])){
@@ -70,6 +76,7 @@ if (!empty($_GET["id"])){
                           <tr>
                             <th> Nom </th>
                             <th> Description </th>
+                            <th> Images </th>
                             <th> Prix </th>
                             <th> Actions </th>
                           </tr>
@@ -81,6 +88,10 @@ if (!empty($_GET["id"])){
                              <?php echo $product['name']?>
                             </td>
                             <td> <?php echo $product['description']?> </td>
+                            <td>
+                                <img src="assets/images/<?php echo $product['images']?>" alt="">
+
+                            </td>
                             <td> <?php echo $product['prix']?> F CFA </td>
 
                               <td>
