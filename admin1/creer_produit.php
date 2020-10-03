@@ -26,7 +26,7 @@ if (!empty($_POST["enregistrer"])) {
         $register_error_message = 'Le mot de passe est obligatoire';
     } else {
         try {
-            $new_user = createProduits($_POST['name'], $_POST['description'], $image_back, $_POST['prix']);
+            $new_user = createProduits($_POST['name'], $_POST['description'], $image_back, $_POST['prix'], $_POST['remise']);
         }catch (Exception $exception){
         }
         //$_SESSION['user_id'] = $user_id;
@@ -106,6 +106,10 @@ if (!empty($_POST["enregistrer"])) {
                                     <div class="form-group">
                                         <label for="prix">Prix</label>
                                         <input name="prix" type="text" class="form-control" id="prix" placeholder="prix">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="prix">Remise</label>
+                                        <input name="remise" type="number" class="form-control" id="remise" placeholder="remise">
                                     </div>
                                     <input name="enregistrer" type="submit" value="Enrégistrer" class="btn btn-gradient-primary mr-2">
                                     <a href="produits.php" class="btn btn-light">Annuler</a>

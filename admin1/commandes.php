@@ -75,7 +75,7 @@ $count_produits = countProduits();
                         <thead>
                           <tr>
                             <th> Date de commande </th>
-                            <th> Réference commande </th>
+                            <th> ID commande </th>
                             <th> Montant total </th>
                             <th> Reference commande </th>
                             <th> Lieu de livraison </th>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'config.php';
 $login_error_message = '';
 if (!empty($_POST['btn-login'])) {

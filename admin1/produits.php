@@ -34,6 +34,19 @@ if (!empty($_GET["id"])){
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
   </head>
   <body>
+
+  <style>
+      .table th img, .table td img {
+          width: 70px !important;
+          height: 70px !important;
+          border-radius: 100% !important;
+      }
+      .action-btn{
+          font-size: 1.7rem;
+          margin: .2rem;
+      }
+
+  </style>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <?php include '_navbar.php'?>
@@ -59,7 +72,7 @@ if (!empty($_GET["id"])){
                   <li class="breadcrumb-item active" aria-current="page">
                     <span></span>
                     <!--Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>-->
-                      <div><a href="creer_produit.php" class="btn btn-success">Ajouter un produits</a></div>
+                      <div><a href="creer_produit.php" class="btn btn-success">Ajouter un produit</a></div>
                   </li>
                 </ul>
               </nav>
@@ -78,6 +91,8 @@ if (!empty($_GET["id"])){
                             <th> Description </th>
                             <th> Images </th>
                             <th> Prix </th>
+                            <th> Remise </th>
+                            <th> Montant remise </th>
                             <th> Actions </th>
                           </tr>
                         </thead>
@@ -93,10 +108,21 @@ if (!empty($_GET["id"])){
 
                             </td>
                             <td> <?php echo $product['prix']?> F CFA </td>
+                            <td> <?php echo $product['remise']?> %</td>
+                            <td>
+                                <?=number_format($product['prix']-($product['prix']*$product['remise'])/100,0,',',' ');echo" FCFA";?>
+                            </td>
 
                               <td>
-                                  <a href="modifier_produit.php?id=<?php echo $product['id'] ?>" type="button" class="btn btn-gradient-info btn-sm">Modifier</a>
-                                  <a href="produits.php?id=<?php echo $product["id"]?>" type="button" class="btn btn-gradient-danger btn-sm">Supprimer</a>
+
+                                  <a class="action-btn text-info" href="modifier_produit.php?id=<?php echo $product['id'] ?>">
+                                      <i class="mdi mdi-border-color"></i>
+                                  </a>
+                                  <a class="action-btn text-danger" href="produits.php?id=<?php echo $product["id"]?>">
+                                      <i class="mdi mdi-delete"></i>
+                                  </a>
+<!--                                  <a href="modifier_produit.php?id=--><?php //echo $product['id'] ?><!--" type="button" class="btn btn-gradient-info btn-sm">Modifier</a>-->
+<!--                                  <a href="produits.php?id=--><?php //echo $product["id"]?><!--" type="button" class="btn btn-gradient-danger btn-sm">Supprimer</a>-->
                               </td>
                           </tr>
                         <?php endforeach; ?>

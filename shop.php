@@ -33,8 +33,12 @@
         <div class="col-md-6 col-lg-3 ftco-animate">
                             <div class="product">
                         <a href="#" class="img-prod">
-    <img class="img-fluid" src="img/<?= $product ->id; ?>.jpg" alt="Colorlib Template">
-                            <span class="status"><?php echo"-"; ?><?= number_format($product->remise);echo" %";?></span>
+    <img class="img-fluid" src="admin1/assets/images/<?= $product ->images; ?>" alt="Colorlib Template">
+                            <?php if ($product->remise > 0): ?>
+                                <span class="status">
+                                    <?php echo"-"; ?><?= number_format($product->remise);echo" %";?>
+                                </span>
+                            <?php endif; ?>
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">

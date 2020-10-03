@@ -7,7 +7,7 @@
 // database Connection variables
 define('HOST', 'localhost'); // Database host name ex. localhost
 define('USER', 'root'); // Database user. ex. root ( if your on local server)
-define('PASSWORD', ''); // user password  (if password is not set for user then keep it empty )
+define('PASSWORD', 'root'); // user password  (if password is not set for user then keep it empty )
 define('DATABASE', 'restaurant'); // Database Database name
 
 function DB()
@@ -139,15 +139,16 @@ function login($email, $password)
 }
 
 //GESTION DES PRODUITS
-function createProduits($name, $description, $images, $prix)
+function createProduits($name, $description, $images, $prix, $remise)
 {
     try {
         $db = DB();
-        $query = $db->prepare("INSERT INTO products(name, description, images, prix) VALUES (:name,:description,:images,:prix)");
+        $query = $db->prepare("INSERT INTO products(name, description, images, prix, remise) VALUES (:name,:description,:images,:prix, :remise)");
         $query->bindParam("name", $name, PDO::PARAM_STR);
         $query->bindParam("description", $description, PDO::PARAM_STR);
         $query->bindParam("images", $images, PDO::PARAM_STR);
         $query->bindParam("prix", $prix, PDO::PARAM_STR);
+        $query->bindParam("remise", $remise, PDO::PARAM_INT);
         $query->execute();
         return $db->lastInsertId();
     } catch (PDOException $e) {
@@ -178,13 +179,13 @@ function findProduit($id)
     return $data;
 }
 
-function updateProduit($name, $prix, $images, $description, $id)
+function updateProduit($name, $prix, $images, $description, $remise, $id)
 {
     $db = DB();
     try {
-        $sql = "UPDATE products SET name = ?,prix = ?,images = ?, description = ? WHERE id = ?";
+        $sql = "UPDATE products SET name = ?,prix = ?,images = ?, description = ?, remise = ? WHERE id = ?";
         $q = $db->prepare($sql);
-        $q->execute(array($name,$prix, $images, $description, $id));
+        $q->execute(array($name,$prix, $images, $description, $remise, $id));
         header("Location: produits.php");
     }catch (Exception $exception){
         var_dump($exception->getMessage());

@@ -2,7 +2,7 @@
 $serveur='localhost';
 $db='restaurant';
 $utilisateur='root';
-$mot_passe='';
+$mot_passe='root';
 try{
 
 	$connexion=new PDO("mysql:host=$serveur;dbname=$db","$utilisateur","$mot_passe");

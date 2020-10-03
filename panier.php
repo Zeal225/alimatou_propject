@@ -55,7 +55,7 @@ foreach($products as $product):
                   <tr class="text-center">
                     <td class="product-remove"><a href="panier.php?delPanier=<?= $product->id; ?>" class="btn btn-primary btn-sm"><span class="ion-ios-close"></span></a></td>
                     
-                    <td class="image-prod"> <img src="img/<?= $product->id; ?>.jpg" class="img"></td>
+                    <td class="image-prod"> <img src="admin1/assets/images/<?php echo $product->images; ?>" class="img"></td>
                     
                     <td class="product-name">
                       <h3><?= $product->name;?></h3>

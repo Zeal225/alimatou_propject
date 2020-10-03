@@ -13,19 +13,32 @@ if (!empty($_GET["id"])) {
 }
 if (!empty($_POST["modifier"])) {
 
+    $uploaddir = 'assets/images/';
+    //$front_dir = '../images/';
+    $uploadfile =  $uploaddir . basename($_FILES['images']['name']);
+    //$uploadfile_front =  $front_dir . basename($_FILES['images']['name']);
+
+    if (move_uploaded_file($_FILES['images']['tmp_name'], $uploadfile)) {
+        //var_dump($uploadfile);die();
+        $image_back =  basename($_FILES['images']['name']);
+
+        //var_dump($image_back); die();
+    }
+
     if ($_POST['name'] == "") {
         $register_error_message = 'Le nom est obligatoire';
     } else if ($_POST['description'] == "") {
         $register_error_message = 'Le email est obligatoire';
-    } else if ($_POST['images'] == "") {
-        $register_error_message = 'Le prenom est obligatoire';
-    } else if ($_POST['prix'] == "") {
+    }  else if ($_POST['prix'] == "") {
         $register_error_message = 'Le mot de passe est obligatoire';
-    } else {
+    }
+    else {
+        //var_dump($image_back); die();
         try {
-            $new_user = updateProduit($_POST['name'], $_POST['prix'], $_POST['images'], $_POST['description'], (int)$_POST["id"]);
-            var_dump($new_user);
-            die();
+            if (empty($_FILES['images']['name'])){
+                $image_back = $_POST['images_old'];
+            }
+            $new_user = updateProduit($_POST['name'], $_POST['prix'], $image_back, $_POST['description'], $_POST['remise'], (int)$_POST["id"]);
             header("Location: produits.php");
         }catch (Exception $exception){
         }
@@ -90,7 +103,7 @@ if (!empty($_POST["modifier"])) {
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <form action="modifier_produit.php" method="post" class="forms-sample">
+                                <form action="modifier_produit.php" method="post" class="forms-sample" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="hidden" name="id" value="<?php echo $produit["id"] ?>">
                                         <label for="exampleInputUsername1">Libelle produit</label>
@@ -101,12 +114,20 @@ if (!empty($_POST["modifier"])) {
                                         <textarea name="description"  type="text" class="form-control" rows="4" id="description" placeholder="description"><?php echo $produit["description"] ?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Images</label>
-                                        <input readonly name="images" value="<?php echo $produit["images"] ?>" type="text" class="form-control" id="images" placeholder="Images">
+                                        <div class="">
+                                            <img class="img-lg" src="assets/images/<?php echo $produit["images"] ?>">
+                                        </div>
+                                        <input name="images" value="<?php echo $produit["images"] ?>" type="file" class="form-control" id="images" placeholder="Images">
+                                        <input name="images_old" value="<?php echo $produit["images"] ?>" type="hidden" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="prix">Prix</label>
                                         <input name="prix" value="<?php echo $produit["prix"] ?>" type="text" class="form-control" id="prix" placeholder="prix">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="prix">Remise</label>
+                                        <input name="remise" value="<?php echo $produit["remise"] ?>" type="number" class="form-control" id="remise" placeholder="remise">
                                     </div>
                                     <input name="modifier" type="submit" value="Modifier" class="btn btn-gradient-primary mr-2">
                                     <a href="produits.php" class="btn btn-light">Annuler</a>
