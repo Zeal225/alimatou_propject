@@ -136,6 +136,7 @@ $count_produits = countProduits();
                             </td>
                               <td>
                                   <a href="modifier_commande.php?id_cmd=<?php echo $commande['id_cmd'] ?>" type="button" class="btn btn-gradient-info btn-sm">Modifier</a>
+                                  <a href="invoice.php?id_cmd=<?php echo $commande['id_cmd'] ?>" type="button" class="btn btn-gradient-secondary btn-sm">Imprimer</a>
                               </td>
                           </tr>
                           <?php endforeach;   ?>

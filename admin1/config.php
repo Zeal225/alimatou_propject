@@ -48,10 +48,12 @@ function findUser($id)
     return $data;
 }
 
+//SELECT commandes.*, client.contact, client.id_client FROM commandes JOIN client ON commandes.id_client = client.id_client ORDER BY id_cmd desc
+
 function findCommande($id)
 {
     $db = DB();
-    $sql = "SELECT * FROM commandes where id_cmd =?";
+    $sql = "SELECT commandes.*, client.* FROM commandes JOIN client ON commandes.id_client = client.id_client where commandes.id_cmd =?";
     $q = $db->prepare($sql);
     $q->execute(array($id));
     $data = $q->fetch(PDO::FETCH_ASSOC);
